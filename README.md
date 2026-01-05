@@ -10,9 +10,9 @@ Welcome to my DSA repository. This space is dedicated to documenting my daily pr
 ---
 
 ## Repository Roadmap
-| Topic | Description | Status |
-| :--- | :--- | :--- |
-| [01-Arrays](./01-Arrays) | Fundamental array manipulation and searching | In Progress |
+| Topic | Status |
+| :--- | :--- |
+| [01-Arrays](./01-Arrays) | In Progress |
 
 ---
 

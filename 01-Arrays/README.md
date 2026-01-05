@@ -11,14 +11,15 @@
 | :--- | :--- | :--- | :--- | :--- | :-- |
 | Find Single Number | [SingleNumber.cpp](./SingleNumber.cpp) | $O(n)$ | Bitwise XOR (Self-inverse property) | Easy | 136
 | Maximum Subarray | [MaxSubArraySum.cpp](./MaxSubArraySum.cpp) | $O(n)$ | Kadane's Algorithm | Medium | 53
+| Pair Sum | [PairSum.cpp](./PairSum.cpp) | $O(n)$ | Two Pointer | Medium | 167
 
 
 ## Problem Logic Breakdowns
 
 <details>
- <summary><b>1. Find The Single Number </b></summary>
-
- > **Solution File:** [SingleNumber.cpp](./SingleNumber.cpp)
+ <summary><b> Find The Single Number </b></summary>
+ 
+ **Solution File:** [SingleNumber.cpp](./SingleNumber.cpp)
 
  ### Logic
  1. Bitwise XOR - n^n = 0 and n^0 = n
@@ -32,7 +33,7 @@
 </details>
 
 <details>
-<summary><b>2. Maximum Subarray Sum (Kadane's Algorithm)</b></summary>
+<summary><b> Maximum Subarray Sum (Kadane's Algorithm)</b></summary>
 
 >**Solution File:** [MaxSubArraySum.cpp](./MaxSubArraySum.cpp)
 
@@ -47,5 +48,24 @@
 - **Space Complexity:** $O(1)$ — No extra data structures used.
 </details>
 
+<details>
+ <summary><b> Pair Sum </b></summary>
+
+ > **Solution File:** [PairSum.cpp](./PairSum.cpp)
+
+ ### Logic
+ 1. Initial State: Since the array is sorted, we initialize two pointers: start at the beginning (smallest value) and end at the last index   (largest value).
+ 2. The Comparison: We calculate the sum of elements at these two pointers.
+    - If sum == target: We found the pair and return the indices.
+    - If sum < target: We need a larger sum, so we move the start pointer forward (start++) to access a larger value.
+    - If sum > target: We need a smaller sum, so we move the end pointer backward (end--) to access a smaller value. 
+
+ ### Why this approach?
+ By exploiting the sorted property of the array, we can find the pair in a single pass. This is far more efficient than the Brute Force approach ($O(n^2)$), which would involve checking every possible combination using nested loops.
+
+ ### Complexity Analysis
+ - **Time Complexity:** $O(n)$ — Single while loop is used.
+ - **Space Complexity:** $O(1)$ — No extra data structures used.
+</details>
 
 
