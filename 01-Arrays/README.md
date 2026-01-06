@@ -12,12 +12,13 @@
 | Find Single Number | [SingleNumber.cpp](./SingleNumber.cpp) | $O(n)$ | Bitwise XOR (Self-inverse property) | Easy | 136
 | Maximum Subarray | [MaxSubArraySum.cpp](./MaxSubArraySum.cpp) | $O(n)$ | Kadane's Algorithm | Medium | 53
 | Pair Sum | [PairSum.cpp](./PairSum.cpp) | $O(n)$ | Two Pointer | Medium | 167
+| Majortiy Element | [MajorityElement.cpp](./MajorityElement.cpp) | $O(n log n)$ | Sorting | Easy | 169
 
 
 ## Problem Logic Breakdowns
 
 <details>
- <summary><b> Find The Single Number </b></summary>
+<summary><b> Find The Single Number </b> </summary>
  
  **Solution File:** [SingleNumber.cpp](./SingleNumber.cpp)
 
@@ -31,6 +32,7 @@
  ### Why this approach?
  The question had specified solution must have a linear time complexity $O(n)$, therefore only one loop can be used. Also Bitwise operators work fast as they run in the CPU registers.
 </details>
+
 
 <details>
 <summary><b> Maximum Subarray Sum (Kadane's Algorithm)</b></summary>
@@ -47,6 +49,7 @@
 - **Time Complexity:** $O(n)$ — Single pass through the array.
 - **Space Complexity:** $O(1)$ — No extra data structures used.
 </details>
+
 
 <details>
  <summary><b> Pair Sum </b></summary>
@@ -66,6 +69,27 @@
  ### Complexity Analysis
  - **Time Complexity:** $O(n)$ — Single while loop is used.
  - **Space Complexity:** $O(1)$ — No extra data structures used.
+</details>
+
+
+<details>
+ <summary><b> Majority Element (sorting) </b></summary>
+
+ > **Solution File:** [MajorityElement.cpp](./MajorityElement.cpp)
+
+ ### Logic
+ 1. Sorting: We first sort the array using std::sort. This ensures all identical elements are placed consecutively.
+ 2. Frequency Count: We traverse the sorted array and count the occurrences of each element.
+    - If the current element is the same as the previous one, we increment the freq counter.
+    - If it's different, we reset the freq counter to 1 and update our ans candidate.
+ 3. Majority Check: At each step, we check if freq > size / 2. If true, the current element is the majority element, and we return it     immediately.
+
+ ### Why this approach?
+ Sorting allows us to identify the majority element in a single linear pass after the $O(n \log n)$ sort. This is a significant improvement over the $O(n^2)$ Brute Force method, as it reduces the number of comparisons needed.
+
+ ### Complexity Analysis
+ - **Time Complexity:** $O(n \log n)$ The subsequent linear traversal is $O(n)$.
+ - **Space Complexity:** $O(1)$ — The algorithm sorts in-place.
 </details>
 
 
