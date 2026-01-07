@@ -38,6 +38,16 @@ int main()
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
 
+    int size;
+    std ::cin >> size;
+
+    std ::vector<int> vec(size);
+    for (int &val : vec)
+    {
+        std::cin >> val;
+    }
+
+    std :: cout << findMajorityElement(vec) << "\n";
 
     return 0;
 
