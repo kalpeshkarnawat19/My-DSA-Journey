@@ -5,11 +5,12 @@
 | Problem | File Name | Time Complexity | Approach | Difficulty | LeetCode Problem No.
 | :--- | :--- | :--- | :--- | :--- | :-- |
 | Find Single Number | [SingleNumber.cpp](./SingleNumber.cpp) | $O(n)$ | Bitwise XOR (Self-inverse property) | Easy | 136
-| Maximum Subarray | [MaxSubArraySum.cpp](./MaxSubArraySum.cpp) | $O(n)$ | Kadane's Algorithm | Medium | 53
-| Pair Sum | [PairSum.cpp](./PairSum.cpp) | $O(n)$ | Two Pointer | Medium | 167
 | Majority Element | [MajorityElement.cpp](./MajorityElement.cpp) | $O(n \log n)$ | Sorting | Easy | 169
 | Majority Element | [MajorityElement_Moore.cpp](./MajorityElement_Moore.cpp) | $O(n)$ | Moore's Voting Algorithm | Easy | 169
 | Stock Buy & Sell | [StockBuyAndSell.cpp](./StockBuyAndSell.cpp) | $O(n)$ | Greedy (Min-So-Far)  | Easy | 121
+| Maximum Subarray | [MaxSubArraySum.cpp](./MaxSubArraySum.cpp) | $O(n)$ | Kadane's Algorithm | Medium | 53
+| Pair Sum | [PairSum.cpp](./PairSum.cpp) | $O(n)$ | Two Pointer | Medium | 167
+| Container With Most Water| [ContainerWithMostWater.cpp](./ContainerWithMostWater.cpp) | $O(n)$ | Two Pointer | Medium | 11
 
 
 ## Problem Logic Breakdowns
@@ -17,7 +18,7 @@
 <details>
 <summary><b> Find The Single Number </b> </summary>
  
- **Solution File:** [SingleNumber.cpp](./SingleNumber.cpp)
+ > **Solution File:** [SingleNumber.cpp](./SingleNumber.cpp)
 
  ### Logic
  1. Bitwise XOR - n^n = 0 and n^0 = n
@@ -34,7 +35,7 @@
 <details>
  <summary><b> Maximum Subarray Sum (Kadane's Algorithm)</b></summary>
 
- **Solution File:** [MaxSubArraySum.cpp](./MaxSubArraySum.cpp)
+ > **Solution File:** [MaxSubArraySum.cpp](./MaxSubArraySum.cpp)
 
  ### Logic
  1. **The Choice:** At each element, we decide whether to add the current element to our existing sum or start a new subarray.
@@ -51,7 +52,7 @@
 <details>
  <summary><b> Pair Sum </b></summary>
 
- **Solution File:** [PairSum.cpp](./PairSum.cpp)
+ > **Solution File:** [PairSum.cpp](./PairSum.cpp)
 
  ### Logic
  1. Initial State: Since the array is sorted, we initialize two pointers: start at the beginning (smallest value) and end at the last index   (largest value).
@@ -72,7 +73,7 @@
 <details>
  <summary><b> Majority Element (sorting) </b></summary>
 
- **Solution File:** [MajorityElement.cpp](./MajorityElement.cpp)
+ > **Solution File:** [MajorityElement.cpp](./MajorityElement.cpp)
 
  ### Logic
  1. Sorting: We first sort the array using std::sort. This ensures all identical elements are placed consecutively.
@@ -93,7 +94,7 @@
 <details>
  <summary><b> Majority Element (Moore's Voting Algorithm) </b></summary>
 
- **Solution File:** [MajorityElement_Moore.cpp](./MajorityElement_Moore.cpp)
+ > **Solution File:** [MajorityElement_Moore.cpp](./MajorityElement_Moore.cpp)
 
  ### Logic
  1. Candidate Selection: We maintain a candidate and a count
@@ -112,7 +113,7 @@
 <details>
 <summary><b> Best Time to Buy and Sell Stock </b> </summary>
  
- **Solution File:** [StockBuyAndSell.cpp](./StockBuyAndSell.cpp)
+ > **Solution File:** [StockBuyAndSell.cpp](./StockBuyAndSell.cpp)
 
  ### Logic
  1. Greedy Approach: We maintain two variables: bestBuy (the lowest price encountered so far) and maxProfit.
@@ -126,5 +127,22 @@
  ### Complexity Analysis
  - **Time Complexity:** $O(n)$ — Single linear pass.
  - **Space Complexity:** $O(1)$ — Only two integer variables used.
+</details>
+
+
+<details>
+<summary><b> Container With Most Water </b> </summary>
+ 
+ > **Solution File:** [ContainerWithMostWater.cpp](./ConatinerWithMostWater.cpp)
+
+ ### Logic
+ 1. Two-Pointer Approach: We place one pointer at the start (lp) and one at the end (rp) of the array.
+ 2. Iteration: At each step, we calculate the area formed by the two lines. The height is limited by the shorter line, and the width is the     distance between pointers.
+  - We update maxWater if the current area is the highest seen.
+  - We move the pointer pointing to the shorter line inward, as this is the only way to potentially find a taller boundary that could compensate for the decreasing width.
+
+ ### Complexity Analysis
+ - **Time Complexity:** $O(n)$ — Single linear pass.
+ - **Space Complexity:** $O(1)$ — Only few integer variables used.
 </details>
 
