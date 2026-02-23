@@ -8,6 +8,7 @@
 | Majority Element | [MajorityElement.cpp](./MajorityElement.cpp) | $O(n \log n)$ | Sorting | Easy | 169
 | Majority Element | [MajorityElement_Moore.cpp](./MajorityElement_Moore.cpp) | $O(n)$ | Moore's Voting Algorithm | Easy | 169
 | Maximum Subarray | [MaxSubArraySum.cpp](./MaxSubArraySum.cpp) | $O(n)$ | Kadane's Algorithm | Medium | 53
+| Pair Sum | [PairSum.cpp](./PairSum.cpp) | $O(n)$ | Two Pointer | Medium | 167
 
 
 ## Problem Logic Breakdowns
@@ -29,6 +30,8 @@
  The question had specified solution must have a linear time complexity $O(n)$, therefore only one loop can be used. Also Bitwise operators work fast as they run in the CPU registers.
 </details>
 
+
+<!------------------------------------------------------------------------------------------------------------------------------------------ -->
 <!-- majority element -->
 <details>
  <summary><b> Majority Element (sorting) </b></summary>
@@ -51,6 +54,7 @@
 </details>
 
 
+<!------------------------------------------------------------------------------------------------------------------------------------------ -->
 <!-- Majority element -->
 <details>
  <summary><b> Majority Element (Moore's Voting Algorithm) </b></summary>
@@ -70,6 +74,8 @@
  - **Space Complexity:**  $O(1)$ — Only two integer variables used.
 </details>
 
+
+<!------------------------------------------------------------------------------------------------------------------------------------------ -->
 <!-- Max Subarray Sum  -->
 <details>
  <summary><b> Maximum Subarray Sum (Kadane's Algorithm)</b></summary>
@@ -87,3 +93,25 @@
  - **Space Complexity:** $O(1)$ — No extra data structures used.
 </details>
 
+
+<!------------------------------------------------------------------------------------------------------------------------------------------ -->
+<!-- Pair Sum -->
+<details>
+ <summary><b> Pair Sum </b></summary>
+
+ > **Solution File:** [PairSum.cpp](./PairSum.cpp)
+
+ ### Logic
+ 1. Initial State: Since the array is sorted, we initialize two pointers: start at the beginning (smallest value) and end at the last index   (largest value).
+ 2. The Comparison: We calculate the sum of elements at these two pointers.
+    - If sum == target: We found the pair and return the indices.
+    - If sum < target: We need a larger sum, so we move the start pointer forward (start++) to access a larger value.
+    - If sum > target: We need a smaller sum, so we move the end pointer backward (end--) to access a smaller value. 
+
+ ### Why this approach?
+ By exploiting the sorted property of the array, we can find the pair in a single pass. This is far more efficient than the Brute Force approach ($O(n^2)$), which would involve checking every possible combination using nested loops.
+
+ ### Complexity Analysis
+ - **Time Complexity:** $O(n)$ — Single while loop is used.
+ - **Space Complexity:** $O(1)$ — No extra data structures used.
+</details>
