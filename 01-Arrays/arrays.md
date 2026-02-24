@@ -10,6 +10,7 @@
 | Stock Buy & Sell | [StockBuyAndSell.cpp](./StockBuyAndSell.cpp) | $O(n)$ | Greedy (Min-So-Far)  | Easy | 121
 | Maximum Subarray | [MaxSubArraySum.cpp](./MaxSubArraySum.cpp) | $O(n)$ | Kadane's Algorithm | Medium | 53
 | Pair Sum | [PairSum.cpp](./PairSum.cpp) | $O(n)$ | Two Pointer | Medium | 167
+| Container With Most Water| [ContainerWithMostWater.cpp](./ContainerWithMostWater.cpp) | $O(n)$ | Two Pointer | Medium | 11
 
 
 ## Problem Logic Breakdowns
@@ -137,5 +138,24 @@
  ### Complexity Analysis
  - **Time Complexity:** $O(n)$ — Single linear pass.
  - **Space Complexity:** $O(1)$ — Only two integer variables used.
+</details>
+
+
+<!------------------------------------------------------------------------------------------------------------------------------------------ -->
+<!-- Container with Most Water -->
+<details>
+<summary><b> Container With Most Water </b> </summary>
+ 
+ > **Solution File:** [ContainerWithMostWater.cpp](./ConatinerWithMostWater.cpp)
+
+ ### Logic
+ 1. Two-Pointer Approach: We place one pointer at the start (lp) and one at the end (rp) of the array.
+ 2. Iteration: At each step, we calculate the area formed by the two lines. The height is limited by the shorter line, and the width is the     distance between pointers.
+  - We update maxWater if the current area is the highest seen.
+  - We move the pointer pointing to the shorter line inward, as this is the only way to potentially find a taller boundary that could compensate for the decreasing width.
+
+ ### Complexity Analysis
+ - **Time Complexity:** $O(n)$ — Single linear pass.
+ - **Space Complexity:** $O(1)$ — Only few integer variables used.
 </details>
 
