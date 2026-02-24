@@ -7,6 +7,7 @@
 | Find Single Number | [SingleNumber.cpp](./SingleNumber.cpp) | $O(n)$ | Bitwise XOR (Self-inverse property) | Easy | 136
 | Majority Element | [MajorityElement.cpp](./MajorityElement.cpp) | $O(n \log n)$ | Sorting | Easy | 169
 | Majority Element | [MajorityElement_Moore.cpp](./MajorityElement_Moore.cpp) | $O(n)$ | Moore's Voting Algorithm | Easy | 169
+| Stock Buy & Sell | [StockBuyAndSell.cpp](./StockBuyAndSell.cpp) | $O(n)$ | Greedy (Min-So-Far)  | Easy | 121
 | Maximum Subarray | [MaxSubArraySum.cpp](./MaxSubArraySum.cpp) | $O(n)$ | Kadane's Algorithm | Medium | 53
 | Pair Sum | [PairSum.cpp](./PairSum.cpp) | $O(n)$ | Two Pointer | Medium | 167
 
@@ -115,3 +116,26 @@
  - **Time Complexity:** $O(n)$ — Single while loop is used.
  - **Space Complexity:** $O(1)$ — No extra data structures used.
 </details>
+
+
+<!------------------------------------------------------------------------------------------------------------------------------------------ -->
+<!-- Stock Buy and Sell-->
+<details>
+<summary><b> Best Time to Buy and Sell Stock </b> </summary>
+ 
+ > **Solution File:** [StockBuyAndSell.cpp](./StockBuyAndSell.cpp)
+
+ ### Logic
+ 1. Greedy Approach: We maintain two variables: bestBuy (the lowest price encountered so far) and maxProfit.
+ 2. Iteration: As we traverse the prices:
+      - If the current price is higher than our bestBuy, we calculate the potential profit and update    maxProfit if it's the highest seen.
+      - We update bestBuy at every step to ensure we are always tracking the absolute minimum price seen up to that point.
+
+ ### Why this approach?
+ A Brute Force approach ($O(n^2)$) would compare every possible buy day with every possible sell day. This $O(n)$ approach works because to maximize profit, you only care about the minimum price seen before the current day.
+
+ ### Complexity Analysis
+ - **Time Complexity:** $O(n)$ — Single linear pass.
+ - **Space Complexity:** $O(1)$ — Only two integer variables used.
+</details>
+
