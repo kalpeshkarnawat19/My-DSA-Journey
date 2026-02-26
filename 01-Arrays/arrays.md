@@ -11,7 +11,7 @@
 | Maximum Subarray | [MaxSubArraySum.cpp](./MaxSubArraySum.cpp) | $O(n)$ | Kadane's Algorithm | Medium | 53
 | Pair Sum | [PairSum.cpp](./PairSum.cpp) | $O(n)$ | Two Pointer | Medium | 167
 | Container With Most Water| [ContainerWithMostWater.cpp](./ContainerWithMostWater.cpp) | $O(n)$ | Two Pointer | Medium | 11
-
+| Product Except Self| [ProductExceptSelf.cpp](./ProductExceptSelf.cpp) | $O(n)$ | Prefix & Suffix Product | Medium | 238
 
 ## Problem Logic Breakdowns
 
@@ -142,7 +142,7 @@
 
 
 <!------------------------------------------------------------------------------------------------------------------------------------------ -->
-<!-- Container with Most Water -->
+<!-- Container with Most Water-->
 <details>
 <summary><b> Container With Most Water </b> </summary>
  
@@ -158,4 +158,27 @@
  - **Time Complexity:** $O(n)$ — Single linear pass.
  - **Space Complexity:** $O(1)$ — Only few integer variables used.
 </details>
+
+
+<!------------------------------------------------------------------------------------------------------------------------------------------ -->
+<!-- Container with Most Water-->
+<details>
+<summary><b> Product Except Self </b> </summary>
+ 
+ > **Solution File:** [ProductExceptSelf.cpp](./ProductExceptSelf.cpp)
+
+ ### Logic
+ - Prefix Pass: We create an answer array ans where each index i stores the product of all elements to the left of nums[i].
+                We initialize ans[0] = because there are no elements to the left of the first element.
+
+ - Suffix Pass: We use a single integer variable suffix (initialized to 1) to keep track of the product of all elements to the right.
+
+ - Combination: We traverse the array from right to left, multiplying the existing prefix product in ans[i] by the current suffix value, then updating suffix by multiplying it with nums[i]
+
+ ### Complexity Analysis
+ - **Time Complexity:** $O(n)$ — Two linear passes (one forward, one backward).
+ - **Space Complexity:** $O(1)$ — If we don't count the output array (which is usually the requirement), as we only use one extra integer variable (suffix).
+</details>
+
+
 
