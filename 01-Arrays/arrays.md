@@ -1,5 +1,5 @@
 # Arrays
-`Arrays` are the most fundamental data structure.
+`Arrays` are the most fundamental data structure. They offer $O(1)$ spatial locality, making them highly optimized for CPU cache prefetching—a critical feature for low-latency and high-frequency systems.
 
 ## Problem Log
 | Problem | File Name | Time Complexity | Approach | Difficulty | LeetCode Problem No.
@@ -12,6 +12,8 @@
 | Pair Sum | [PairSum.cpp](./PairSum.cpp) | $O(n)$ | Two Pointer | Medium | 167
 | Container With Most Water| [ContainerWithMostWater.cpp](./ContainerWithMostWater.cpp) | $O(n)$ | Two Pointer | Medium | 11
 | Product Except Self| [ProductExceptSelf.cpp](./ProductExceptSelf.cpp) | $O(n)$ | Prefix & Suffix Product | Medium | 238
+| Pow(x,n)| [Pow(x,n).cpp](./Pow(x,n).cpp) | $O(\log n)$ | Binary Exponentiation | Medium | 50
+
 
 ## Problem Logic Breakdowns
 
@@ -22,14 +24,14 @@
  > **Solution File:** [SingleNumber.cpp](./SingleNumber.cpp)
 
  ### Logic
- 1. Bitwise XOR - n^n = 0 and n^0 = n
- 2. Since only one number is unique, taking XOR of all elements, the same ones will cancel out.
+ 1. **Apply Bitwise XOR:** Utilize the properties $n \oplus n = 0$ and $n \oplus 0 = n$.
+ 2. **Elimination:** Since only one number is unique, take the XOR of all elements. Duplicate numbers will mathematically cancel out, leaving only the unique number.
 
  ### Edge Cases Handled 
- - **Incorrect Input:** handled by checking `if (!(std::cin >> size)) return 0`. 
+ - **Incorrect Input:** Prevent invalid streams by checking `if (!(std::cin >> size)) return 0;`. 
 
  ### Why this approach?
- The question had specified solution must have a linear time complexity $O(n)$, therefore only one loop can be used. Also Bitwise operators work fast as they run in the CPU registers.
+ The constraints strictly demand linear time complexity $O(n)$ and $O(1)$ auxiliary space. Furthermore, bitwise operations are exceptionally fast as they execute directly within CPU registers.
 </details>
 
 
@@ -41,17 +43,15 @@
  > **Solution File:** [MajorityElement.cpp](./MajorityElement.cpp)
 
  ### Logic
- 1. Sorting: We first sort the array using std::sort. This ensures all identical elements are placed consecutively.
- 2. Frequency Count: We traverse the sorted array and count the occurrences of each element.
-    - If the current element is the same as the previous one, we increment the freq counter.
-    - If it's different, we reset the freq counter to 1 and update our ans candidate.
- 3. Majority Check: At each step, we check if freq > size / 2. If true, the current element is the majority element, and we return it immediately.
+ 1. **Sort:** Sort the array using `std::sort` to guarantee all identical elements are placed consecutively.
+ 2. **Count:** Traverse the sorted array and count occurrences. If the current element matches the previous, increment the frequency counter. Otherwise, reset the counter to 1 and update the candidate.
+ 3. **Verify:** At each step, check if `freq > size / 2`. If true, return the element immediately.
 
  ### Why this approach?
- Sorting allows us to identify the majority element in a single linear pass after the $O(n \log n)$ sort. This is a significant improvement over the $O(n^2)$ Brute Force method, as it reduces the number of comparisons needed.
+ Sorting maps the $O(n^2)$ Brute Force search down to a single linear pass following an $O(n \log n)$ operation, drastically reducing the total number of comparisons.
 
  ### Complexity Analysis
- - **Time Complexity:** $O(n \log n)$ The subsequent linear traversal is $O(n)$.
+ - **Time Complexity:** $O(n \log n)$ — Dominated by the sorting algorithm. The subsequent traversal is $O(n)$.
  - **Space Complexity:** $O(1)$ — The algorithm sorts in-place.
 </details>
 
@@ -63,17 +63,14 @@
 
  > **Solution File:** [MajorityElement_Moore.cpp](./MajorityElement_Moore.cpp)
 
- ### Logic
- 1. Candidate Selection: We maintain a candidate and a count
- 2. The Process:
-    - If count == 0, we pick the current element as our new candidate.
-    - If the current element matches the candidate, we increment count.
-    - If it doesn't match, we decrement count.
- 3. The Survivor: Because the majority element exists > $n/2$ times, it will mathematically always be the last candidate standing after all "votes" are processed.
+### Logic
+ 1. **Initialize:** Maintain a `candidate` variable and a `count`.
+ 2. **Process:** Traverse the array. If `count == 0`, assign the current element as the new `candidate`. If the current element matches the candidate, increment the `count`. If it differs, decrement the `count`.
+ 3. **The Survivor:** Because the majority element strictly exists $> n/2$ times, it mathematically remains the last candidate standing after all elements are processed.
 
  ### Complexity Analysis
- - **Time Complexity:** $O(n)$ — Single linear pass.
- - **Space Complexity:**  $O(1)$ — Only two integer variables used.
+ - **Time Complexity:** $O(n)$ — Optimal single linear pass.
+ - **Space Complexity:** $O(1)$ — Only two integer variables are allocated.
 </details>
 
 
@@ -84,15 +81,17 @@
 
  > **Solution File:** [MaxSubArraySum.cpp](./MaxSubArraySum.cpp)
 
- ### Logic
- 1. **The Choice:** At each element, we decide whether to add the current element to our existing sum or start a new subarray.
- 2. **The Reset:** If `currentSum` drops below 0, it will only decrease the sum of any future subarray. Therefore, we reset it to 0 (effectively starting a new subarray from the next element).
- 3. **Global Max:** We keep track of the highest `currentSum` we've ever seen using `maxSum`.
- 4. **Key Intuition**: A subarray with a negative sum is a "liability." Adding a negative number to a future sequence will always result in a smaller sum than if that future sequence stood alone. Hence, we "cut our losses" and reset to zero.
+### Logic
+ 1. **The Choice:** At each element, determine whether to add the current element to the existing sequence sum or start a new sequence.
+ 2. **The Reset:** If `currentSum` drops below 0, reset it to 0. A negative sum is a liability that strictly decreases the overall value of any future sequence.
+ 3. **Global Max:** Track the highest `currentSum` encountered using the `maxSum` variable.
+
+ ### Edge Cases Handled
+ - **Integer Overflow:** Handled potential overflow for large arrays ($10^5$ elements) by tracking sums using `long long` instead of standard 32-bit integers.
 
  ### Complexity Analysis
  - **Time Complexity:** $O(n)$ — Single pass through the array.
- - **Space Complexity:** $O(1)$ — No extra data structures used.
+ - **Space Complexity:** $O(1)$ — No extra data structures utilized.
 </details>
 
 
@@ -103,19 +102,19 @@
 
  > **Solution File:** [PairSum.cpp](./PairSum.cpp)
 
- ### Logic
- 1. Initial State: Since the array is sorted, we initialize two pointers: start at the beginning (smallest value) and end at the last index   (largest value).
- 2. The Comparison: We calculate the sum of elements at these two pointers.
-    - If sum == target: We found the pair and return the indices.
-    - If sum < target: We need a larger sum, so we move the start pointer forward (start++) to access a larger value.
-    - If sum > target: We need a smaller sum, so we move the end pointer backward (end--) to access a smaller value. 
+### Logic
+ 1. **Initialize:** Exploit the sorted property of the array by placing two pointers: `start` at index 0 and `end` at the final index.
+ 2. **Compare:** Calculate the sum of the elements at these pointers.
+    - If `sum == target`: Return the indices.
+    - If `sum < target`: Move the `start` pointer forward to access a larger value.
+    - If `sum > target`: Move the `end` pointer backward to access a smaller value. 
 
  ### Why this approach?
- By exploiting the sorted property of the array, we can find the pair in a single pass. This is far more efficient than the Brute Force approach ($O(n^2)$), which would involve checking every possible combination using nested loops.
+ Exploiting the sorted array property collapses an $O(n^2)$ nested-loop search into a highly efficient $O(n)$ linear scan.
 
  ### Complexity Analysis
- - **Time Complexity:** $O(n)$ — Single while loop is used.
- - **Space Complexity:** $O(1)$ — No extra data structures used.
+ - **Time Complexity:** $O(n)$ — Bounded by a single `while` loop.
+ - **Space Complexity:** $O(1)$ — Pointer variables only.
 </details>
 
 
@@ -127,17 +126,15 @@
  > **Solution File:** [StockBuyAndSell.cpp](./StockBuyAndSell.cpp)
 
  ### Logic
- 1. Greedy Approach: We maintain two variables: bestBuy (the lowest price encountered so far) and maxProfit.
- 2. Iteration: As we traverse the prices:
-      - If the current price is higher than our bestBuy, we calculate the potential profit and update    maxProfit if it's the highest seen.
-      - We update bestBuy at every step to ensure we are always tracking the absolute minimum price seen up to that point.
+ 1. **Greedy Tracking:** Maintain two states: `bestBuy` (the absolute minimum price seen) and `maxProfit`.
+ 2. **Iterate:** Traverse the array. If the current price exceeds `bestBuy`, calculate the potential profit and update `maxProfit` if it is the highest seen. Update `bestBuy` at every iteration to lock in the lowest historical price.
 
  ### Why this approach?
- A Brute Force approach ($O(n^2)$) would compare every possible buy day with every possible sell day. This $O(n)$ approach works because to maximize profit, you only care about the minimum price seen before the current day.
+ Maximizing profit only requires knowing the lowest price that occurred *prior* to the current day, eliminating the need for an $O(n^2)$ exhaustive search.
 
  ### Complexity Analysis
  - **Time Complexity:** $O(n)$ — Single linear pass.
- - **Space Complexity:** $O(1)$ — Only two integer variables used.
+ - **Space Complexity:** $O(1)$ — Constant auxiliary space.
 </details>
 
 
@@ -146,38 +143,57 @@
 <details>
 <summary><b> Container With Most Water </b> </summary>
  
- > **Solution File:** [ContainerWithMostWater.cpp](./ConatinerWithMostWater.cpp)
+ > **Solution File:** [ContainerWithMostWater.cpp](./ContainerWithMostWater.cpp)
 
- ### Logic
- 1. Two-Pointer Approach: We place one pointer at the start (lp) and one at the end (rp) of the array.
- 2. Iteration: At each step, we calculate the area formed by the two lines. The height is limited by the shorter line, and the width is the     distance between pointers.
-  - We update maxWater if the current area is the highest seen.
-  - We move the pointer pointing to the shorter line inward, as this is the only way to potentially find a taller boundary that could compensate for the decreasing width.
+### Logic
+ 1. **Initialize:** Place one pointer at the start (`lp`) and one at the end (`rp`) to maximize initial width.
+ 2. **Iterate:** Calculate the area. The height is bottlenecked by the shorter line, and the width is the distance between the pointers.
+ 3. **Update:** Record the maximum area seen. Move the pointer of the *shorter* line inward, as this is the only mathematical way to potentially find a taller boundary that compensates for the decreasing width.
 
  ### Complexity Analysis
  - **Time Complexity:** $O(n)$ — Single linear pass.
- - **Space Complexity:** $O(1)$ — Only few integer variables used.
+ - **Space Complexity:** $O(1)$ — Constant auxiliary space.
 </details>
 
 
 <!------------------------------------------------------------------------------------------------------------------------------------------ -->
-<!-- Container with Most Water-->
+<!-- Product Except Self-->
 <details>
 <summary><b> Product Except Self </b> </summary>
  
  > **Solution File:** [ProductExceptSelf.cpp](./ProductExceptSelf.cpp)
 
  ### Logic
- - Prefix Pass: We create an answer array ans where each index i stores the product of all elements to the left of nums[i].
-                We initialize ans[0] = because there are no elements to the left of the first element.
-
- - Suffix Pass: We use a single integer variable suffix (initialized to 1) to keep track of the product of all elements to the right.
-
- - Combination: We traverse the array from right to left, multiplying the existing prefix product in ans[i] by the current suffix value, then updating suffix by multiplying it with nums[i]
+ 1. **Prefix Pass:** Create an array `ans` where `ans[i]` stores the product of all elements to the left. Initialize `ans[0] = 1` since there are no elements left of index 0.
+ 2. **Suffix Pass:** Initialize a single integer variable `suffix = 1` to track the running product of all elements to the right.
+ 3. **Combine:** Traverse the array from right to left. Multiply `ans[i]` by `suffix`, then update `suffix` by multiplying it with `nums[i]`.
 
  ### Complexity Analysis
  - **Time Complexity:** $O(n)$ — Two linear passes (one forward, one backward).
- - **Space Complexity:** $O(1)$ — If we don't count the output array (which is usually the requirement), as we only use one extra integer variable (suffix).
+ - **Space Complexity:** $O(1)$ — Excluding the required output array, only one integer variable (`suffix`) is utilized.
+</details>
+
+
+<!------------------------------------------------------------------------------------------------------------------------------------------ -->
+<!-- Pow(x,n) -->
+<details>
+<summary><b> Pow(x,n) </b> </summary>
+ 
+ > **Solution File:** [Pow(x,n).cpp](./Pow(x,n).cpp)
+
+### Logic
+ 1. **Divide and Conquer:** Instead of multiplying $x$ by itself $n$ times ($O(n)$), utilize the binary exponentiation property $x^n = (x^{n/2})^2$.
+ 2. **Bitwise Execution:** Traverse the bits of $n$. If the current bit is 1, multiply the running result by the current power of $x$. At every step, square $x$ ($x = x * x$).
+ 3. **Edge Case Handling:**
+    - **Negative Exponents:** If $n < 0$, transform the problem to $(1/x)^{-n}$. Cast $n$ to a `long long` to prevent integer overflow when $n = -2^{31}$.
+    - **Base Cases:** Handle $x=0$, $x=1$, and $n=0$ explicitly for early exit efficiency.
+
+### Why this approach?
+A linear $O(n)$ approach will trigger a Time Limit Exceeded (TLE) verdict for $n = 2^{31}-1$. Binary Exponentiation drops the multiplication operations to approximately $\log_2(n)$, making it strictly optimal for massive limits.
+
+### Complexity Analysis
+- **Time Complexity:** $O(\log n)$ — The exponent is halved in each iteration.
+- **Space Complexity:** $O(1)$ — Only a fixed amount of extra space (`ans` and `long long` for the exponent) is allocated.
 </details>
 
 
