@@ -13,6 +13,7 @@
 | Container With Most Water| [ContainerWithMostWater.cpp](./ContainerWithMostWater.cpp) | $O(n)$ | Two Pointer | Medium | 11
 | Product Except Self| [ProductExceptSelf.cpp](./ProductExceptSelf.cpp) | $O(n)$ | Prefix & Suffix Product | Medium | 238
 | Pow(x,n)| [Pow(x,n).cpp](./Pow(x,n).cpp) | $O(\log n)$ | Binary Exponentiation | Medium | 50
+| Search in Rotated Sorted Array| [RotatedSortedArray.cpp](./RotatedSortedArray.cpp) | $O(\log n)$ | Modified Binary | Medium | 33
 
 
 ## Problem Logic Breakdowns
@@ -194,6 +195,31 @@ A linear $O(n)$ approach will trigger a Time Limit Exceeded (TLE) verdict for $n
 ### Complexity Analysis
 - **Time Complexity:** $O(\log n)$ — The exponent is halved in each iteration.
 - **Space Complexity:** $O(1)$ — Only a fixed amount of extra space (`ans` and `long long` for the exponent) is allocated.
+</details>
+
+
+<!------------------------------------------------------------------------------------------------------------------------------------------ -->
+<!-- RotatedSortedArray -->
+<details>
+<summary><b> Search in Rotated Sorted Array </b> </summary>
+ 
+ > **Solution File:** [RotatedSortedArray.cpp](./RotatedSortedArray.cpp)
+
+ ### Logic
+ 1. **Initialize Pointers:** Set `st` to index 0 and `end` to the final index of the array to define the search space.
+ 2. **Locate Sorted Half:** Calculate `mid`. Determine which continuous half of the array is strictly sorted by comparing the value at `st` to the value at `mid`.
+ 3. **Target Verification:** If the left half is sorted, check if the target mathematically falls within its bounds (`nums[st] <= target && target < nums[mid]`). If true, eliminate the right half (`end = mid - 1`). Otherwise, eliminate the left half (`st = mid + 1`).
+ 4. **Mirror Logic:** Apply the exact inverse logic if the right half is identified as the sorted segment.
+
+ ### Edge Cases Handled 
+ - **Pointer Collision:** Handled the edge case where the search space shrinks to two elements (causing `st` and `mid` to point to the exact same index) by utilizing the `<=` operator (`nums[st] <= nums[mid]`).
+
+ ### Why this approach?
+ The problem strictly requires an $O(\log n)$ runtime complexity, immediately ruling out an $O(n)$ linear scan. This modified Binary Search achieves this by guaranteeing that at least one half of the rotated array is always sorted, allowing us to safely discard half the search space at every step.
+
+ ### Complexity Analysis
+ - **Time Complexity:** $O(\log n)$ — The search space is halved in each iteration of the `while` loop.
+ - **Space Complexity:** $O(1)$ — Only three integer pointer variables (`st`, `end`, `mid`) are allocated.
 </details>
 
 
